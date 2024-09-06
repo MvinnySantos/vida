@@ -44,14 +44,11 @@
             display: none; /* Inicialmente oculta a imagem */
             margin: 20px auto; /* Centraliza a imagem horizontalmente */
         }
-        #loveText {
-            font-size: 18px; /* Ajuste o tamanho da fonte conforme necessário */
-            margin-top: 20px;
-            display: none; /* Inicialmente oculta o texto de amor */
-            color: #333; /* Cor do texto */
-            line-height: 1.6; /* Espaçamento entre linhas */
-            max-width: 600px; /* Limita a largura do texto para melhor leitura */
-            margin: 20px auto; /* Centraliza o texto horizontalmente */
+        #loveVideo {
+            width: 100%; /* Ajusta o tamanho do vídeo conforme necessário */
+            max-width: 600px; /* Limita a largura máxima do vídeo */
+            display: none; /* Inicialmente oculta o vídeo */
+            margin: 20px auto; /* Centraliza o vídeo horizontalmente */
         }
         @media (max-width: 600px) {
             .message, button {
@@ -63,9 +60,8 @@
             #heartImage {
                 width: 80px; /* Ajusta o tamanho da imagem do coração em telas menores */
             }
-            #loveText {
-                font-size: 14px;
-                padding: 8px 16px;
+            #loveVideo {
+                width: 90%; /* Ajusta o tamanho do vídeo em telas menores */
             }
         }
     </style>
@@ -77,14 +73,10 @@
     <button id="yesButton" onclick="handleClick('yes')">Sim</button>
     <div id="loveMessage" class="hidden">Te amo!</div>
     <img src="coracao.jpeg" alt="Coração" id="heartImage"> <!-- Use uma imagem PNG com fundo transparente -->
-    <div id="loveText" class="hidden">
-        🌹 Às vezes, palavras não conseguem capturar a profundidade do que sinto por você. Mas quero que saiba que, em cada momento do nosso dia, o meu coração está sempre pensando em você. O seu sorriso ilumina os meus dias e a sua presença é a melodia que dá sentido à minha vida.<br><br>
-        Cada toque seu é como uma carícia do destino, cada olhar é uma conversa silenciosa que fala diretamente à minha alma. Estar ao seu lado é como descobrir um novo mundo a cada instante, um mundo onde tudo faz sentido porque você está nele.<br><br>
-        O amor que sinto por você é mais do que uma simples emoção; é uma eterna jornada que me faz querer ser a melhor versão de mim mesmo. É na simplicidade dos momentos que compartilham nossos corações que encontro o verdadeiro significado da felicidade.<br><br>
-        Você é meu porto seguro, meu refúgio e meu sonho realizado. Em cada gesto seu, encontro uma razão para me apaixonar novamente, dia após dia. Quero passar o resto da minha vida construindo memórias ao seu lado, celebrando a beleza da nossa conexão e explorando o infinito de possibilidades que o nosso amor proporciona.<br><br>
-        Obrigado por ser você, por cada sorriso, cada abraço, e cada momento especial. O amor que tenho por você transcende palavras e se reflete em tudo que faço, tudo que sonho e tudo que sou. Você é minha eternidade, meu presente e meu futuro.<br><br>
-        Com todo o meu amor. 🌹        
-    </div>
+    <video id="loveVideo" class="hidden" autoplay playsinline>
+        <source src="video.mp4" type="video/mp4"> <!-- Substitua "video.mp4" pelo caminho do seu vídeo -->
+        Seu navegador não suporta o elemento de vídeo.
+    </video>
 
     <script>
         let buttonSize = 16; // Tamanho inicial da fonte do botão "Não"
@@ -102,10 +94,16 @@
             } else if (response === 'yes') {
                 document.getElementById('loveMessage').classList.remove('hidden');
                 document.getElementById('heartImage').style.display = 'block'; // Mostra a imagem do coração
-                document.getElementById('loveText').style.display = 'block'; // Mostra o texto de amor
+                document.getElementById('loveVideo').style.display = 'block'; // Mostra o vídeo
                 document.getElementById('message').style.display = 'none'; // Esconde a mensagem de desculpas
                 document.getElementById('noButton').style.display = 'none'; // Esconde o botão "Não"
                 document.getElementById('yesButton').style.display = 'none'; // Esconde o botão "Sim"
+                
+                // Garantir que o vídeo inicie automaticamente
+                const video = document.getElementById('loveVideo');
+                video.play().catch(error => {
+                    console.error('Erro ao tentar reproduzir o vídeo:', error);
+                });
             }
         }
     </script>
